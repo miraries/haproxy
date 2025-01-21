@@ -13,8 +13,7 @@ BUILD_VERSION_REPOSHA = $(shell git rev-parse --short HEAD)
 
 EXTRA_CFLAGS = -g -ggdb3 -gdwarf-4 -Wall -Wextra
 
-HAPROXY_OPTIMIZATION = -O2
-OPT_CFLAGS = $(HAPROXY_OPTIMIZATION)
+OPT_CFLAGS = $HAPROXY_OPTIMIZATION
 
 HAPROXY_LIBUBSAN = false
 ifeq ($(HAPROXY_LIBUBSAN),true)
@@ -109,6 +108,7 @@ override_dh_auto_configure:
 override_dh_auto_build-arch:
 	$(info Enabling address sanitizer: $(HAPROXY_LIBASAN))
 	$(MAKE) -j $(shell nproc) $(MAKEARGS_LINUX)
+	./haproxy -vv
 	if [ -d "dev/haring" ]; then $(MAKE) dev/haring/haring $(MAKEARGS_LINUX); fi
 	if [ -d "admin/systemd" ]; then $(MAKE) -C admin/systemd $(MAKEARGS_LINUX); fi
 

@@ -176,6 +176,8 @@ prepare-deb: $(HAPROXY_DEBORIG) $(HAPROXY_BUILDIR)
 	export BUILD_DATE="$(shell date -u +'%a, %e %b %Y %H:%m:%S %z')" && \
 		export BUILD_VERSION="$(HAPROXY_VERSION)-$(HAPROXY_SHORTSHA)-1~mangadex+$(BUILD_VERSION_REPOSHA)" && \
 		export BUILD_MESSAGE="$(shell echo "$${BUILD_MESSAGE:-"No build message"}" | head -n1)" && \
+		export HAPROXY_OPTIMIZATION="$(HAPROXY_OPTIMIZATION)" && \
+		envsubst < rules.debian > "$(HAPROXY_BUILDIR)/debian/rules" && \
 		envsubst < changelog.debian | tee "$(HAPROXY_BUILDIR)/debian/changelog" && \
 		cat debian/changelog >> "$(HAPROXY_BUILDIR)/debian/changelog"
 

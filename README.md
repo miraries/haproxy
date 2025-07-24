@@ -2,6 +2,7 @@
 
 Build scripts for HAProxy with QUIC
 
+
 **PROJECT STATUS: STABLE**. We have been using it in our own production systems
 for months now without issues. If you rely on it for critical purposes, maintain
 your own fork, so that a potential tagging/CI issue doesn't cause you problems.
